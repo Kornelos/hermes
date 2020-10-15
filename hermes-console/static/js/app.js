@@ -14,6 +14,7 @@ var hermes = angular.module('hermes', [
     'hermes.diagnostics',
     'hermes.constraints',
     'hermes.diagnostics',
+    'hermes.consistency',
     'hermes.visibility',
     'hermes.mode'
 ]);
@@ -61,6 +62,20 @@ hermes.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$uibToo
                 .state('constraints', {
                     url: '/constraints',
                     templateUrl: 'partials/constraints.html'
+                })
+                .state('consistency', {
+                    url: '/consistency',
+                    templateUrl: 'partials/consistency.html'
+                })
+                .state('groupConsistency', {
+                    url: '/consistency/:groupName',
+                    templateUrl: 'partials/groupConsistency.html',
+                    params: { group: null }
+                })
+                .state('topicConsistency', {
+                    url: '/consistency/:groupName/topics/:topicName',
+                    templateUrl: 'partials/topicConsistency.html',
+                    params: { topic: null }
                 })
                 .state('search', {
                     url: '/search?entity&property&operator&pattern',

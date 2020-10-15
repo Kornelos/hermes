@@ -1,0 +1,48 @@
+<section ng-controller="ConsistencyController">
+
+    <ol class="breadcrumb">
+        <li><a href="#/">home</a></li>
+        <li class="active">consistency</li>
+    </ol>
+
+    <div class="pull-right">
+        <button class="btn btn-primary" ng-show="admin" ng-click="edit()"
+                uib-tooltip="Minimum amount of time between consecutive message retries.">Calculate copies
+        </button>
+    </div>
+
+    <h1>Consistency</h1>
+
+    <div ng-if="fetching" class="text-center">
+        <h1><i class="fa fa-circle-o-notch fa-spin"></i></h1>
+    </div>
+
+    <div class="row text-center" ng-if="!fetching && inconsistentGroups.length == 0">
+        <div class="col-md-12">
+            <p class="alert alert-success">Everything is consistent</p>
+        </div>
+    </div>
+
+    <div class="row container" ng-if="!fetching && inconsistentGroups.length > 0">
+        <div class="list-group">
+            <div class="list-group-item list-group-item-warning">
+                <div class="form-inline pull-right">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                        <input class="form-control" ng-model="search.name" placeholder="search...">
+                    </div>
+                </div>
+                <h4>Inconsistent groups</h4>
+            </div>
+            <a class="list-group-item" ng-repeat="group in inconsistentGroups | filter:search:strict | orderBy:'name'"
+               ng-click="goToGroup(group)">
+                <small>{{$index + 1}}</small>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <strong>{{group.name}}</strong>
+                <div class="pull-right">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</section>
